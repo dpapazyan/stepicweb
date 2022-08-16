@@ -1,8 +1,6 @@
-def app(environ, start_response):
+def divide_params(environ, start_response):
+    body = [bytes(e + '\n', encoding='ascii') for e in environ['QUERY_STRING'].split(sep='&')]
     status = '200 OK'
-    headers = [
-        ('Content-type', 'text/plain')
-        ]
-    body = [bytes(i + '\n', 'ascii') for i in environ['QUERY_STRING'].split('&')]
-    start_response (status, headers)
+    headers = [('Content-Type', 'text/plain')]
+    start_response(status, headers)
     return body
